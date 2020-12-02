@@ -33,6 +33,14 @@ new P5((sketch) => {
 npm i p5i
 ```
 
+CDN
+
+```html
+<script src="http://unpkg.com/p5i"></script>
+```
+
+Functions will be exposed to global variable `P5I`.
+
 ## Usage
 
 <details>
@@ -96,17 +104,17 @@ sketch.mount(document.getElementById('canvas'))
 Or
 
 ```ts
-import { createP5, P5i } from 'p5i'
+import { createP5, P5I } from 'p5i'
 
 let y = 100
 
-function setup({ createCanvas, stroke, frameRate }: P5i) {
+function setup({ createCanvas, stroke, frameRate }: P5I) {
   createCanvas(720, 400)
   stroke(255)
   frameRate(30)
 }
 
-function draw({ background, line, height, width }: P5i) {
+function draw({ background, line, height, width }: P5I) {
   background(0)
   y = y - 1
   if (y < 0) {
@@ -121,7 +129,7 @@ createP5({ setup, draw }, document.getElementById('canvas'))
 Or
 
 ```ts
-import { createP5, P5i } from 'p5i'
+import { createP5, P5I } from 'p5i'
 
 const { mount, createCanvas, stroke, frameRate, background, line } = createP5()
 
@@ -133,7 +141,7 @@ function setup() {
   frameRate(30)
 }
 
-function draw({ height, width }: P5i) {
+function draw({ height, width }: P5I) {
   background(0)
   y = y - 1
   if (y < 0) {

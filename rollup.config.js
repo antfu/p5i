@@ -11,7 +11,7 @@ export default [
       {
         file: 'dist/p5i.browser.js',
         format: 'umd',
-        name: 'P5i',
+        name: 'P5I',
       },
       {
         file: 'dist/p5i.js',
