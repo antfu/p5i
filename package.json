@@ -1,0 +1,44 @@
+{
+  "name": "p5i",
+  "version": "0.0.0",
+  "description": "p5.js, but with more friendly instance mode APIs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "jsdeliver": "dist/index.global.ts",
+  "unpkg": "dist/index.global.ts",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/antfu/p5i/issues"
+  },
+  "homepage": "https://github.com/antfu/p5i#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/p5i.git"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "watch": "npm run build -- --watch",
+    "dev": "esno src/p5i.ts",
+    "build": "tsup src/p5i.ts --format cjs,esm,iife --dts --global-name P5i",
+    "publish:ci": "npm publish --access public",
+    "release": "npx bumpp --commit --push --tag && npm run publish:ci"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@types/p5": "^0.9.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config-ts": "^0.4.3",
+    "@types/node": "^14.14.6",
+    "eslint": "^7.12.1",
+    "esno": "^0.2.4",
+    "p5": "^1.1.9",
+    "tsup": "^3.7.1",
+    "typescript": "^4.0.5"
+  }
+}
