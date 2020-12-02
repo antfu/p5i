@@ -35,8 +35,8 @@ npm i p5i
 
 ## Usage
 
-<summary>
-<detail>Before</detail>
+<details>
+<summary>Before</summary>
 <br>
 
 ```js
@@ -62,7 +62,7 @@ const myp5 = new P5((sketch) => {
 }, document.getElementById('canvas'))
 ```
 
-</summary>
+</details>
 
 After
 
@@ -145,8 +145,8 @@ function draw({ height, width }: P5i) {
 mount(document.getElementById('canvas'), { setup, draw })
 ```
 
-<summary>
-<detail><del>Or if you are fine with non-strict JavaScript</del></detail>
+<details>
+<summary><del>Or if you are fine with non-strict JavaScript</del></summary>
 <br>
 
 The [`with` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with):
@@ -176,4 +176,4 @@ createP5((sketch) => {
 }, document.getElementById('canvas'))
 ```
 
-</summary>
+</details>
