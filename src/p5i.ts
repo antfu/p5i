@@ -16,7 +16,7 @@ export interface P5iOptions {
   draw?: (p5i: P5i) => void
 }
 
-export function createP5(fn?: (p5i: P5i) => P5iOptions | void, el?: HTMLElement | undefined): P5i {
+export function createP5(fnOrOptions?: P5iOptions | ((p5i: P5i) => P5iOptions | void), el?: HTMLElement | undefined): P5i {
   let instance: P5 | undefined
   const options: P5iOptions = {}
 
@@ -34,8 +34,8 @@ export function createP5(fn?: (p5i: P5i) => P5iOptions | void, el?: HTMLElement 
       new P5((_instance) => {
         instance = _instance
 
-        if (fn)
-          Object.assign(options, fn(proxy) || {})
+        if (fnOrOptions)
+          Object.assign(options, (typeof fnOrOptions === 'function' ? fnOrOptions(proxy) : fnOrOptions) || {})
 
         if (_options)
           Object.assign(options, _options)
