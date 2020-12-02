@@ -1,10 +1,11 @@
+/* eslint-disable no-use-before-define */
 import P5 from 'p5'
+import { functionNames } from './functionNames'
 
-// eslint-disable-next-line no-use-before-define
 export type P5i = P5 & Helpers
 
 type Helpers = {
-  mount(el: HTMLElement): void
+  mount(el: HTMLElement, options?: P5iOptions): void
   unmount(): void
   setup?: (p5i: P5i) => void
   draw?: (p5i: P5i) => void
@@ -26,16 +27,22 @@ export function createP5(fn?: (p5i: P5i) => P5iOptions | void, el?: HTMLElement 
         instance = undefined
       }
     },
-    mount(el) {
+    mount(el, _options) {
       helpers.unmount()
 
-      instance = new P5(() => {}, el)
+      // eslint-disable-next-line no-new
+      new P5((_instance) => {
+        instance = _instance
 
-      if (fn)
-        Object.assign(options, fn(proxy) || {})
+        if (fn)
+          Object.assign(options, fn(proxy) || {})
 
-      instance.setup = () => options.setup?.(proxy)
-      instance.draw = () => options.draw?.(proxy)
+        if (_options)
+          Object.assign(options, _options)
+
+        instance!.setup = () => options.setup?.(proxy)
+        instance!.draw = () => options.draw?.(proxy)
+      }, el)
 
       return proxy
     },
@@ -46,12 +53,18 @@ export function createP5(fn?: (p5i: P5i) => P5iOptions | void, el?: HTMLElement 
       const helper = Reflect.get(helpers, p, r)
       if (helper)
         return helper
+      if (functionNames.includes(p)) {
+        // @ts-ignore
+        return (...args) => {
+          if (!instance)
+            throw new Error(`can not "${p}" access before mounting`)
+          // @ts-ignore
+          return instance[p](...args)
+        }
+      }
       if (!instance)
         throw new Error(`can not "${p}" access before mounting`)
-      const v = Reflect.get(instance, p, r)
-      if (typeof v === 'function')
-        return v.bind(instance)
-      return v
+      return Reflect.get(instance, p, r)
     },
     set(_, p: string, v) {
       if (['setup', 'draw'].includes(p)) {

@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p5i demo</title>
+  <script src="../dist/p5i.browser.js"></script>
+</head>
+<body>
+  <div id="canvas"></div>
+
+  <script>
+    (() => {
+      const { createCanvas, noStroke, ellipse, dist, background, mount } = P5i.createP5()
+
+      let max_distance
+
+      function setup(p5) {
+        createCanvas(710, 400)
+        noStroke()
+        max_distance = dist(0, 0, p5.width, p5.height)
+      }
+
+      function draw({ width, height, mouseX, mouseY }) {
+        background(0)
+
+        for (let i = 0; i <= width; i += 20) {
+          for (let j = 0; j <= height; j += 20) {
+            let size = dist(mouseX, mouseY, i, j)
+            size = (size / max_distance) * 66
+            ellipse(i, j, size, size)
+          }
+        }
+      }
+
+      mount(document.getElementById('canvas'), { setup, draw })
+    })()
+  </script>
+</body>
+</html>
