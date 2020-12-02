@@ -8,6 +8,7 @@
   "jsdelivr": "dist/p5i.browser.js",
   "unpkg": "dist/p5i.browser.js",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "funding": "https://github.com/sponsors/antfu",
   "license": "MIT",
   "sideEffects": false,
   "bugs": {

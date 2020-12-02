@@ -185,3 +185,18 @@ createP5((sketch) => {
 ```
 
 </details>
+
+
+## Sponsors
+
+This project is part of my <a href='https://github.com/antfu-sponsors'>Sponsor Program</a>
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
+  </a>
+</p>
+
+## License
+
+MIT
