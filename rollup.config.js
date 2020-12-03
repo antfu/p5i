@@ -6,7 +6,6 @@ import typescript from 'rollup-plugin-typescript2'
 export default [
   {
     input: 'src/p5i.ts',
-    sourcemap: true,
     output: [
       {
         file: 'dist/p5i.browser.js',

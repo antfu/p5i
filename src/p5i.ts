@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 import P5 from 'p5'
 import { functionNames } from './functionNames'
+import { optionNames } from './optionNames'
 
 export type P5I = P5 & Helpers
 
@@ -11,14 +12,14 @@ type Helpers = {
   draw?: (p5i: P5I) => void
 }
 
-export interface P5IOptions {
-  setup?: (p5i: P5I) => void
-  draw?: (p5i: P5I) => void
-}
+export type OptionNames = (typeof optionNames)[number]
+export type P5IOptions = Partial<Record<OptionNames, (p5i: P5I) => void>>
 
 export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void), el?: HTMLElement | undefined): P5I {
   let instance: P5 | undefined
-  const options: P5IOptions = {}
+  const options: P5IOptions = {
+    setup() {},
+  }
 
   const helpers: Helpers = {
     unmount() {
@@ -40,8 +41,10 @@ export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | 
         if (_options)
           Object.assign(options, _options)
 
-        instance!.setup = () => options.setup?.(proxy)
-        instance!.draw = () => options.draw?.(proxy)
+        for (const key of optionNames) {
+          if (options[key])
+            instance![key] = () => options[key]?.(proxy)
+        }
       }, el)
 
       return proxy
@@ -67,7 +70,7 @@ export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | 
       return Reflect.get(instance, p, r)
     },
     set(_, p: string, v) {
-      if (['setup', 'draw'].includes(p)) {
+      if (optionNames.includes(p as OptionNames)) {
         // @ts-ignore
         options[p] = v
         return true
