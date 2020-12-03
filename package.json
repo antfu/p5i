@@ -21,7 +21,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "exports": "esno scripts/exports.ts",
+    "fetch": "esno scripts/fetch.ts",
     "watch": "npm run build -- --watch",
     "dev": "esno src/p5i.ts",
     "build": "rollup -c",
@@ -39,6 +39,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@types/node": "^14.14.10",
+    "axios": "^0.21.0",
     "eslint": "^7.14.0",
     "esno": "^0.3.0",
     "jsdom": "^16.4.0",

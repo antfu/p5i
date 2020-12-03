@@ -2,8 +2,9 @@
 import P5 from 'p5'
 import { functionNames } from './functionNames'
 import { optionNames } from './optionNames'
+import * as CONSTANTS from './constants'
 
-export type P5I = P5 & Helpers
+export declare type P5I = P5 & Helpers
 
 type Helpers = {
   mount(el: HTMLElement, options?: P5IOptions): void
@@ -15,7 +16,7 @@ type Helpers = {
 export type OptionNames = (typeof optionNames)[number]
 export type P5IOptions = Partial<Record<OptionNames, (p5i: P5I) => void>>
 
-export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void), el?: HTMLElement | undefined): P5I {
+export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void), el?: HTMLElement | undefined): P5I {
   let instance: P5 | undefined
   const options: P5IOptions = {
     setup() {},
@@ -76,6 +77,11 @@ export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | 
         return true
       }
 
+      // @ts-ignore
+      if (CONSTANTS[p] != null)
+        // @ts-ignore
+        return CONSTANTS[p]
+
       if (!instance)
         throw new Error(`can not "${p}" access before mounting`)
 
@@ -88,3 +94,5 @@ export function createP5(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | 
 
   return proxy
 }
+
+export const createP5 = p5i

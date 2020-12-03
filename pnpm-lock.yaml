@@ -5,6 +5,7 @@ devDependencies:
   '@rollup/plugin-commonjs': 17.0.0_rollup@2.34.0
   '@rollup/plugin-node-resolve': 11.0.0_rollup@2.34.0
   '@types/node': 14.14.10
+  axios: 0.21.0
   eslint: 7.14.0
   esno: 0.3.0
   jsdom: 16.4.0
@@ -505,6 +506,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
+  /axios/0.21.0:
+    dependencies:
+      follow-redirects: 1.13.0
+    dev: true
+    resolution:
+      integrity: sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
   /babel-eslint/10.1.0_eslint@7.14.0:
     dependencies:
       '@babel/code-frame': 7.10.4
@@ -1353,6 +1360,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
+  /follow-redirects/1.13.0:
+    dev: true
+    engines:
+      node: '>=4.0'
+    resolution:
+      integrity: sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
   /forever-agent/0.6.1:
     dev: true
     resolution:
@@ -3054,6 +3067,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^11.0.0
   '@types/node': ^14.14.10
   '@types/p5': ^0.9.1
+  axios: ^0.21.0
   eslint: ^7.14.0
   esno: ^0.3.0
   jsdom: ^16.4.0
