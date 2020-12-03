@@ -66,6 +66,11 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
           return instance[p](...args)
         }
       }
+      // @ts-ignore
+      if (CONSTANTS[p] != null)
+        // @ts-ignore
+        return CONSTANTS[p]
+
       if (!instance)
         throw new Error(`can not "${p}" access before mounting`)
       return Reflect.get(instance, p, r)
@@ -76,11 +81,6 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
         options[p] = v
         return true
       }
-
-      // @ts-ignore
-      if (CONSTANTS[p] != null)
-        // @ts-ignore
-        return CONSTANTS[p]
 
       if (!instance)
         throw new Error(`can not "${p}" access before mounting`)
