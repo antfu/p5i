@@ -27,7 +27,7 @@ new P5((sketch) => {
 }, document.getElementById('canvas'))
 ```
 
-To get rid of it, you may think of destructuring, but you can't
+To get rid of it, you may think of destructuring, but it won't work
 
 ```ts
 new P5((sketch) => {
@@ -35,7 +35,7 @@ new P5((sketch) => {
   const { frameRate, createCanvas } = sketch
 
   sketch.setup = () => {
-    // `this` get lost
+    // `this` gets lost
     createCanvas(200, 200)
   }
 })
