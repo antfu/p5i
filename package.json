@@ -1,6 +1,6 @@
 {
   "name": "p5i",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "p5.js, but with more friendly instance mode APIs",
   "main": "dist/p5i.js",
   "module": "dist/p5i.mjs",
