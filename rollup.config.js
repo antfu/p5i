@@ -6,12 +6,8 @@ import typescript from 'rollup-plugin-typescript2'
 export default [
   {
     input: 'src/p5i.ts',
+    external: ['p5'],
     output: [
-      {
-        file: 'dist/p5i.browser.js',
-        format: 'umd',
-        name: 'P5I',
-      },
       {
         file: 'dist/p5i.js',
         format: 'cjs',
@@ -19,6 +15,17 @@ export default [
       {
         file: 'dist/p5i.mjs',
         format: 'esm',
+      },
+    ],
+    plugins: [typescript(), nodeResolve(), commonjs()],
+  },
+  {
+    input: 'src/p5i.ts',
+    output: [
+      {
+        file: 'dist/p5i.browser.js',
+        format: 'umd',
+        name: 'P5I',
       },
     ],
     plugins: [typescript(), nodeResolve(), commonjs()],

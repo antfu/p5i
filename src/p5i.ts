@@ -1,12 +1,17 @@
 /* eslint-disable no-use-before-define */
-import P5 from 'p5'
+import type P5 from 'p5'
 import { functionNames } from './functionNames'
 import { optionNames } from './optionNames'
 import * as CONSTANTS from './constants'
 
-export declare type P5I = P5 & Helpers
+let p5: any
 
 const isClient = typeof window !== 'undefined'
+
+if (!isClient)
+  p5 = require('p5')
+
+export declare type P5I = P5 & Helpers
 
 type Helpers = {
   mount(el: HTMLElement, options?: P5IOptions): void
@@ -40,8 +45,8 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
 
       helpers.unmount()
 
-      // eslint-disable-next-line no-new
-      new P5((_instance) => {
+      // eslint-disable-next-line no-new, new-cap
+      new p5((_instance: P5) => {
         instance = _instance
 
         if (fnOrOptions)

@@ -32,6 +32,7 @@
     "dist"
   ],
   "dependencies": {
+    "p5": "^1.1.9",
     "@types/p5": "^0.9.1"
   },
   "devDependencies": {
@@ -43,7 +44,6 @@
     "eslint": "^7.14.0",
     "esno": "^0.3.0",
     "jsdom": "^16.4.0",
-    "p5": "^1.1.9",
     "puppeteer": "^5.5.0",
     "rollup": "^2.34.0",
     "rollup-plugin-dts": "^2.0.0",
