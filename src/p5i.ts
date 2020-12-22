@@ -6,6 +6,8 @@ import * as CONSTANTS from './constants'
 
 export declare type P5I = P5 & Helpers
 
+const isClient = typeof window !== 'undefined'
+
 type Helpers = {
   mount(el: HTMLElement, options?: P5IOptions): void
   unmount(): void
@@ -24,12 +26,18 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
 
   const helpers: Helpers = {
     unmount() {
+      if (!isClient)
+        return
+
       if (instance) {
         instance.remove()
         instance = undefined
       }
     },
     mount(el, _options) {
+      if (!isClient)
+        return proxy
+
       helpers.unmount()
 
       // eslint-disable-next-line no-new
