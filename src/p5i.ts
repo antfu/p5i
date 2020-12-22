@@ -8,7 +8,7 @@ let p5: any
 
 const isClient = typeof window !== 'undefined'
 
-if (!isClient)
+if (isClient)
   p5 = require('p5')
 
 export declare type P5I = P5 & Helpers
