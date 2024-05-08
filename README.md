@@ -78,9 +78,9 @@ const myp5 = new P5((sketch) => {
   sketch.draw = () => {
     sketch.background(0)
     y = y - 1
-    if (y < 0) {
+    if (y < 0)
       y = sketch.height
-    }
+
     sketch.line(0, y, sketch.width, y)
   }
 }, document.getElementById('canvas'))
@@ -104,9 +104,9 @@ function setup({ createCanvas, stroke, frameRate }) {
 function draw({ background, line, height, width }) {
   background(0)
   y = y - 1
-  if (y < 0) {
+  if (y < 0)
     y = height
-  }
+
   line(0, y, width, y)
 }
 
@@ -116,7 +116,7 @@ p5i({ setup, draw }, document.getElementById('canvas'))
 Or
 
 ```ts
-import { p5i, P5I } from 'p5i'
+import { P5I, p5i } from 'p5i'
 
 const { mount, createCanvas, stroke, frameRate, background, line } = p5i()
 
@@ -132,9 +132,9 @@ function setup() {
 function draw({ height, width }: P5I) {
   background(0)
   y = y - 1
-  if (y < 0) {
+  if (y < 0)
     y = height
-  }
+
   line(0, y, width, y)
 }
 
@@ -158,13 +158,13 @@ const sketch = p5i(() => {
     draw({ background, height, width, line }) {
       background(0)
       y = y - 1
-      if (y < 0) {
+      if (y < 0)
         y = height
-      }
+
       line(0, y, width, y)
     }
   }
-)
+})
 
 // you can mount it later
 sketch.mount(document.getElementById('canvas'))
@@ -175,6 +175,8 @@ sketch.mount(document.getElementById('canvas'))
 <br>
 
 The [`with` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with):
+
+<!-- eslint-skip -->
 
 ```js
 p5i((sketch) => {
@@ -190,9 +192,9 @@ p5i((sketch) => {
     function draw() {
       background(0)
       y = y - 1
-      if (y < 0) {
+      if (y < 0)
         y = height
-      }
+
       line(0, y, width, y)
     }
 
@@ -202,7 +204,6 @@ p5i((sketch) => {
 ```
 
 </details>
-
 
 ## Sponsors
 

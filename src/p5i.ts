@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import P5 from 'p5'
 import { functionNames } from './functionNames'
 import { optionNames } from './optionNames'
@@ -8,9 +7,9 @@ const isClient = typeof window !== 'undefined'
 
 export declare type P5I = P5 & Helpers
 
-type Helpers = {
-  mount(el: HTMLElement, options?: P5IOptions): void
-  unmount(): void
+interface Helpers {
+  mount: (el: HTMLElement, options?: P5IOptions) => void
+  unmount: () => void
   setup?: (p5i: P5I) => void
   draw?: (p5i: P5I) => void
 }
@@ -23,6 +22,8 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
   const options: P5IOptions = {
     setup() {},
   }
+
+  let proxy: P5I
 
   const helpers: Helpers = {
     unmount() {
@@ -40,7 +41,6 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
 
       helpers.unmount()
 
-      // eslint-disable-next-line no-new
       new P5((_instance: P5) => {
         instance = _instance
 
@@ -60,23 +60,23 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
     },
   }
 
-  const proxy: P5I = new Proxy<any>(helpers, {
+  proxy = new Proxy<any>(helpers, {
     get(_, p: string, r) {
       const helper = Reflect.get(helpers, p, r)
       if (helper)
         return helper
       if (functionNames.includes(p)) {
-        // @ts-ignore
+        // @ts-expect-error
         return (...args) => {
           if (!instance)
             throw new Error(`can not "${p}" access before mounting`)
-          // @ts-ignore
+          // @ts-expect-error
           return instance[p](...args)
         }
       }
-      // @ts-ignore
+      // @ts-expect-error
       if (CONSTANTS[p] != null)
-        // @ts-ignore
+        // @ts-expect-error
         return CONSTANTS[p]
 
       if (!instance)
@@ -85,7 +85,7 @@ export function p5i(fnOrOptions?: P5IOptions | ((p5i: P5I) => P5IOptions | void)
     },
     set(_, p: string, v) {
       if (optionNames.includes(p as OptionNames)) {
-        // @ts-ignore
+        // @ts-expect-error
         options[p] = v
         return true
       }

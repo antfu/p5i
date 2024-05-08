@@ -9,7 +9,7 @@ export default [
     external: ['p5'],
     output: [
       {
-        file: 'dist/p5i.js',
+        file: 'dist/p5i.cjs',
         format: 'cjs',
       },
       {
