@@ -1,7 +1,7 @@
 import P5 from 'p5'
+import * as CONSTANTS from './constants'
 import { functionNames } from './functionNames'
 import { optionNames } from './optionNames'
-import * as CONSTANTS from './constants'
 
 const isClient = typeof window !== 'undefined'
 
