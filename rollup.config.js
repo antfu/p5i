@@ -6,12 +6,7 @@ import typescript from 'rollup-plugin-typescript2'
 export default [
   {
     input: 'src/p5i.ts',
-    external: ['p5'],
     output: [
-      {
-        file: 'dist/p5i.cjs',
-        format: 'cjs',
-      },
       {
         file: 'dist/p5i.mjs',
         format: 'esm',
